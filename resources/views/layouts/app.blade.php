@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @livewireStyles
+    @vite(['resources/js/app.js'])
 </head>
 <body>
     <div id="app">
@@ -71,10 +73,19 @@
                 </div>
             </div>
         </nav>
+        
+        <div id="main">
+            @include('partials.session-message')
+            <main class="py-4">
+                <div class="container-fluid py-1 px-5">
+                    @yield('content')
+                </div>
+            </main>
+        </div>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
+    {{ $slot }}
+ 
+    @livewireScriptConfig 
 </body>
 </html>

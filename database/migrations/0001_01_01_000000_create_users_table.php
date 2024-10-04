@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->string('email')->unique();
+            $table->string('identification')->nullable();
+            $table->foreignId('position_id')->nullable()->references('id')->on('positions')->constrained()->onDelete('set null');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

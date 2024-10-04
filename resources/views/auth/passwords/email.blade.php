@@ -14,7 +14,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">{{ __('Reset Password') }}</h1>
                                 </div>
 
-                                @if ($errors->any())
+                                {{-- @if ($errors->any())
                                     <div class="alert alert-danger border-left-danger" role="alert">
                                         <ul class="pl-4 my-2">
                                             @foreach ($errors->all() as $error)
@@ -28,7 +28,7 @@
                                     <div class="alert alert-success border-left-success" role="alert">
                                         {{ session('status') }}
                                     </div>
-                                @endif
+                                @endif --}}
 
                                 <form method="POST" action="{{ route('password.email') }}" class="user">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

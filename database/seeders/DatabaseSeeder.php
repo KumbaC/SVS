@@ -12,18 +12,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
+         $this->call([
+            PositionSeeder::class,
+            TypeCoinSeeder::class,
+        ]);
+        
          \App\Models\User::factory()->create([
-             'name' => 'John',
-             'last_name' => 'Doe',
+             'name' => 'Antonio',
+             'last_name' => 'Puerta',
              'password' => 'password',
-             'email' => 'test@example.com',
+             'email' => 'antoniolenovo115@gmail.com',
+             'identification' => '27597000',
+             'position_id' => 1,
          ]);
     }
 }

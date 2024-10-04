@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Laravel SB Admin 2">
-    <meta name="author" content="Alejandro RH">
+    <meta name="author" content="Antonio Puerta">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}">
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
@@ -44,7 +45,7 @@
         <li class="nav-item {{ Nav::isRoute('home') }}">
             <a class="nav-link" href="{{ route('home') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>{{ __('Dashboard') }}</span></a>
+                <span>{{ __('Inicio') }}</span></a>
         </li>
 
         <!-- Divider -->
@@ -58,16 +59,65 @@
         <!-- Nav Item - Profile -->
         <li class="nav-item {{ Nav::isRoute('profile') }}">
             <a class="nav-link" href="{{ route('profile') }}">
-                <i class="fas fa-fw fa-user"></i>
-                <span>{{ __('Profile') }}</span>
+                <i class="fas fa-fw fa-user-circle"></i>
+                <span>{{ __('Perfil') }}</span>
             </a>
         </li>
+
+        <!-- Nav Item - Cajas -->
+        <li class="nav-item {{ Nav::isRoute('boxes') }}">
+            <a class="nav-link" href="{{ route('boxes.create') }}">
+                <i class="fas fa-fw fa-cash-register"></i>  
+                <span>{{ __('Cajas') }}</span> 
+            </a>
+        </li>
+
+        <!-- Nav Item - Clientes -->
+        <li class="nav-item {{ Nav::isRoute('profile') }}">
+            <a class="nav-link" href="{{ route('profile') }}">
+                <i class="fas fa-fw fa-user-friends"></i>
+                <span>{{ __('Clientes') }}</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Cargos -->
+        <li class="nav-item {{ Nav::isRoute('profile') }}">
+            <a class="nav-link" href="{{ route('profile') }}">
+                <i class="fas fa-fw fa-briefcase"></i>
+                <span>{{ __('Cargos') }}</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Inventarios -->
+        <li class="nav-item {{ Nav::isRoute('profile') }}">
+            <a class="nav-link" href="{{ route('profile') }}">
+                <i class="fas fa-fw fa-dolly-flatbed"></i>
+                <span>{{ __('Inventario') }}</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Ventas -->
+        <li class="nav-item {{ Nav::isRoute('profile') }}">
+            <a class="nav-link" href="{{ route('profile') }}">
+                <i class="fas fa-fw fa-shopping-bag"></i>
+                <span>{{ __('Ventas') }}</span>
+            </a>
+        </li>       
+
+        <!-- Nav Item - Tipos de Monedas -->
+        <li class="nav-item {{ Nav::isRoute('profile') }}">
+            <a class="nav-link" href="{{ route('profile') }}">
+                <i class="fas fa-fw fa-search-dollar"></i>
+                <span>{{ __('Tipo de Monedas') }}</span>
+            </a>
+        </li>       
+
 
         <!-- Nav Item - About -->
         <li class="nav-item {{ Nav::isRoute('about') }}">
             <a class="nav-link" href="{{ route('about') }}">
                 <i class="fas fa-fw fa-hands-helping"></i>
-                <span>{{ __('About') }}</span>
+                <span>{{ __('Acerca de Nosotros') }}</span>
             </a>
         </li>
 
@@ -248,7 +298,7 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="{{ route('profile') }}">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('Profile') }}
+                                {{ __('Perfil') }}
                             </a>
                             <a class="dropdown-item" href="javascript:void(0)">
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -261,7 +311,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('Logout') }}
+                                {{ __('Salir') }}
                             </a>
                         </div>
                     </li>
@@ -273,7 +323,7 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
+                @include('partials.session-message')
                 @yield('main-content')
 
             </div>
@@ -286,7 +336,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; <a href="https://github.com/aleckrh" target="_blank">Aleckrh</a> {{ now()->year }}</span>
+                    <span>Derechos de autor &copy; <a href="#" target="_blank">SVS</a> {{ now()->year }}</span>
                 </div>
             </div>
         </footer>
@@ -307,15 +357,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ __('Ready to Leave?') }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ __('¿Listo para salir?') }}</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</div>
             <div class="modal-footer">
-                <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
-                <a class="btn btn-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Cancelar') }}</button>
+                <a class="btn btn-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Cerrar sesión') }}</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
@@ -326,6 +376,7 @@
 
 <!-- Scripts -->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>

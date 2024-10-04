@@ -45,7 +45,7 @@ class ProfileController extends Controller
         }
 
         $user->save();
-
-        return redirect()->route('profile')->withSuccess('Profile updated successfully.');
+        session()->flash('success', 'El perfil se actualizó correctamente.');
+        return redirect()->route('profile');
     }
 }
